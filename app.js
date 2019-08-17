@@ -20,8 +20,6 @@
 
   function initialState() {
     xScore = {
-      // increment 0-7 incase one of the combinations in the streak above is selected,
-      // once a full streak set (0->3) is made, game ends.
       0: 0,
       1: 0,
       2: 0,
