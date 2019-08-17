@@ -1,0 +1,58 @@
+* {
+  padding: 0;
+  margin: 0;
+}
+body {
+  font-family: "roboto", Arial, Helvetica, sans-serif;
+  font-size: 20px;
+  height: 100%;
+  width: 100%;
+}
+main {
+  margin-top: 200px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.arena {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+button {
+  color: black;
+  outline: none;
+  background-color: transparent;
+  border: 1px solid black;
+  height: 100px;
+  width: 100px;
+  margin: 2px;
+  text-transform: uppercase;
+  cursor: pointer;
+  font-size: 3em;
+  transition: border 0.2s ease-in-out;
+}
+.arena button:hover,
+.arena button:focus {
+  border: 1px dotted grey;
+}
+.control button {
+  margin: 50px;
+  text-align: center;
+  height: 40px;
+  width: 70px;
+  font-size: 0.7em;
+  transition: all 0.3s ease-in-out;
+}
+.disabled {
+  text-decoration: line-through;
+  background-color: crimson;
+  color: white;
+}
+.enabled {
+  text-decoration: none;
+  background-color: limegreen;
+  color: white;
+}
