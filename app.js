@@ -42,41 +42,33 @@
       7: 0
     };
     arena.style.pointerEvents = "none";
+    arena.style.border = "";
+    
     buttons.forEach(btn => {
       btn.textContent = "-";
       btn.style.color = "black";
     });
+	  
     reset.disabled = true;
-    reset.classList.add("disabled");
-    selectPlayer.classList.add("enabled");
+    selectPlayer.disabled = false;
+    playerDisplay.textContent = "";
   }
   //choose player
   selectPlayer.addEventListener("click", () => {
-    arena.style.pointerEvents = "";
-
+    selectPlayer.disabled = true;
+    selectPlayer.classList.replace("enabled", "disabled");
+	 
     reset.disabled = false;
     reset.classList.replace("disabled", "enabled");
 
-    selectPlayer.disabled = true;
-    selectPlayer.classList.replace("enabled", "disabled");
-
+    arena.style.pointerEvents = "";
     firstPlayer = Math.random() > 0.5 ? true : false;
     secondPlayer = !firstPlayer;
+	  
     playerDisplay.textContent = `${firstPlayer ? "O" : "X"} goes first`;
   });
 
-  // reset the game
-  reset.addEventListener("click", () => {
-    initialState();
-    arena.style.border = "";
-    selectPlayer.disabled = false;
-    selectPlayer.classList.replace("disabled", "enabled");
-	playerDisplay.textContent = "";
-    reset.disabled = true;
-    reset.classList.replace("enabled", "disabled");
-  });
-
-  //handle button clicks
+  //handle arena/buttons clicks
   arena.addEventListener("click", e => {
     // check if button !already been picked
     if (e.target.textContent !== "O" && e.target.textContent !== "X") {
@@ -98,7 +90,6 @@
               streaks[i].forEach(i => {
                 buttons[i].style.color = "limegreen"; // green for victory
               });
-              //playerDisplay.textContent = `${!firstPlayer ? "First Player" : "Second Player"} won`;
               arena.style.pointerEvents = "none";
               arena.style.border = "3px solid limegreen";
             }
@@ -111,5 +102,13 @@
     }
   });
 
+   // reset the game
+  reset.addEventListener("click", () => {
+    initialState(); 
+	  
+    reset.classList.replace("enabled", "disabled");
+    selectPlayer.classList.replace("disabled", "enabled");
+  });
+	
   initialState();
 })();
