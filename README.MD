@@ -1,6 +1,6 @@
 # 3x3 Tic Tac Toe
 
-### spaghetti code version
+### spaghetti code version [Click to play](https://3afia.github.io/tictactoe-3afia/)
 This 3x3 tic tac toe with two players where a random function selects who plays first.
 The logic of this code is that, one player has to have a streak of moves (button click) in order to win. these streaks are:
 ```javascript
