@@ -73,6 +73,7 @@
     // check if button !already been picked
     if (e.target.textContent !== "O" && e.target.textContent !== "X") {
       // player choose x or o
+      let score;
       if (e.target.tagName === "BUTTON") {
         if (firstPlayer) {
           e.target.textContent = "O";
