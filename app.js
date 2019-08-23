@@ -3,7 +3,7 @@
   const arena = document.querySelector(".arena"),
     buttons = document.querySelectorAll(".btn"),
     reset = document.querySelector("#reset"),
-    playerDisplay = document.querySelector("h5"),
+    status = document.querySelector("h5"),
     streaks = [
       // if a player clicked/selected these buttons, they win.
       [0, 1, 2],
@@ -46,14 +46,14 @@
     });
     firstPlayer = Math.random() > 0.5 ? true : false;
     secondPlayer = !firstPlayer;
-    playerDisplay.textContent = `${firstPlayer ? "O" : "X"} goes first`;
+    status.textContent = `${firstPlayer ? "O" : "X"} goes first`;
     arena.style.pointerEvents = "";
   }
   //handle arena/buttons clicks
   arena.addEventListener("click", e => {
     if (e.target.tagName === "BUTTON") {
-      // check if button !already been picked
       let score;
+      // check if button !already been picked
       if (e.target.textContent !== "O" && e.target.textContent !== "X") {
         if (firstPlayer) {
           e.target.textContent = "O";
@@ -62,18 +62,15 @@
           e.target.textContent = "X";
           score = xScore;
         }
-        moves++;
         //checking for score
         streaks.forEach((comb, i) => {
           if (comb.indexOf(Number(e.target.value)) !== -1) {
             score[i]++;
             // did player win?
             if (score[i] === 3) {
-              streaks[i].forEach(i => {
-                buttons[i].style.color = "limegreen"; // green for victory
-                won = true;
-                playerDisplay.textContent = `${firstPlayer ? "O" : "X"} won`;
-              });
+              won = true;
+              status.textContent = `${firstPlayer ? "O" : "X"} won`;
+              streaks[i].forEach(i => (buttons[i].style.color = "limegreen"));
               arena.style.pointerEvents = "none";
               arena.style.border = "3px solid limegreen";
             }
@@ -82,11 +79,12 @@
         // flipping turns
         firstPlayer = !firstPlayer;
         secondPlayer = !secondPlayer;
-        if (moves == 9 && !won) playerDisplay.textContent = "tie";
+        // next move
+        moves++;
       }
+      if (moves === 9 && !won) status.textContent = "tie";
     }
   });
-
   // reset the game
   reset.addEventListener("click", () => {
     initialState();
