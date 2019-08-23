@@ -1,10 +1,8 @@
 (function() {
-  let firstPlayer, secondPlayer, xScore, oScore, moves;
-
+  let firstPlayer, secondPlayer, xScore, oScore, moves, won;
   const arena = document.querySelector(".arena"),
     buttons = document.querySelectorAll(".btn"),
     reset = document.querySelector("#reset"),
-    selectPlayer = document.querySelector("#select"),
     playerDisplay = document.querySelector("h5"),
     streaks = [
       // if a player clicked/selected these buttons, they win.
@@ -20,6 +18,7 @@
 
   function initialState() {
     moves = 0;
+    won = false;
     xScore = {
       0: 0,
       1: 0,
@@ -40,33 +39,16 @@
       6: 0,
       7: 0
     };
-    arena.style.pointerEvents = "none";
     arena.style.border = "";
-
     buttons.forEach(btn => {
       btn.textContent = "-";
       btn.style.color = "black";
     });
-
-    reset.disabled = true;
-    selectPlayer.disabled = false;
-    playerDisplay.textContent = "";
-  }
-  //choose player
-  selectPlayer.addEventListener("click", () => {
-    selectPlayer.disabled = true;
-    selectPlayer.classList.replace("enabled", "disabled");
-
-    reset.disabled = false;
-    reset.classList.replace("disabled", "enabled");
-
-    arena.style.pointerEvents = "";
     firstPlayer = Math.random() > 0.5 ? true : false;
     secondPlayer = !firstPlayer;
-
     playerDisplay.textContent = `${firstPlayer ? "O" : "X"} goes first`;
-  });
-
+    arena.style.pointerEvents = "";
+  }
   //handle arena/buttons clicks
   arena.addEventListener("click", e => {
     if (e.target.tagName === "BUTTON") {
@@ -89,8 +71,8 @@
             if (score[i] === 3) {
               streaks[i].forEach(i => {
                 buttons[i].style.color = "limegreen"; // green for victory
-                console.log(secondPlayer);
-                playerDisplay.textContent = secondPlayer ? "X won" : "O won";
+                won = true;
+                playerDisplay.textContent = `${firstPlayer ? "O" : "X"} won`;
               });
               arena.style.pointerEvents = "none";
               arena.style.border = "3px solid limegreen";
@@ -100,7 +82,7 @@
         // flipping turns
         firstPlayer = !firstPlayer;
         secondPlayer = !secondPlayer;
-        if (moves == 9) playerDisplay.textContent = "tie";
+        if (moves == 9 && !won) playerDisplay.textContent = "tie";
       }
     }
   });
@@ -108,9 +90,6 @@
   // reset the game
   reset.addEventListener("click", () => {
     initialState();
-
-    reset.classList.replace("enabled", "disabled");
-    selectPlayer.classList.replace("disabled", "enabled");
   });
 
   initialState();
