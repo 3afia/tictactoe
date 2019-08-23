@@ -46,13 +46,6 @@ button {
   font-weight: 900;
   transition: all 0.3s ease-in-out;
 }
-.disabled {
-  text-decoration: line-through;
-  background-color: crimson;
-  color: white;
-}
-.enabled {
-  text-decoration: none;
+.control button:hover {
   background-color: limegreen;
-  color: white;
 }
