@@ -39,11 +39,11 @@ button {
   border: 1px dotted grey;
 }
 .control button {
-  margin: 50px;
+  margin: 30px;
   text-align: center;
   height: 40px;
-  width: 70px;
-  font-size: 0.7em;
+  font-size: 0.6em;
+  font-weight: 900;
   transition: all 0.3s ease-in-out;
 }
 .disabled {
